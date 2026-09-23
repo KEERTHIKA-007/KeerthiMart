@@ -1,0 +1,8 @@
+build/
+vcpkg_installed/
+uploads/tmp/
+.vs/
+.vscode/
+*.user
+.env
+config.json
