@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>KeerthiMart</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 0;
+        }
+
+        header {
+            background-color: #2874f0;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            width: 350px;
+            background-color: white;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #2874f0;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            margin: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1258c7;
+        }
+
+        hr {
+            margin: 25px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>KeerthiMart</h1>
+        <p>Online Multi-Seller Marketplace</p>
+    </header>
+
+    <div class="container">
+
+        <h2>Login</h2>
+
+        <input
+            type="text"
+            id="loginUsername"
+            placeholder="Username">
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password">
+
+        <button onclick="loginUser()">
+            Login
+        </button>
+
+        <hr>
+
+        <h2>Register</h2>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Username">
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email">
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password">
+
+        <select id="role">
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+        </select>
+
+        <button onclick="registerUser()">
+            Register
+        </button>
+
+    </div>
+
+    <script>
+
+        async function registerUser()
+        {
+            const username =
+                document.getElementById("username").value;
+
+            const email =
+                document.getElementById("email").value;
+
+            const password =
+                document.getElementById("password").value;
+
+            const role =
+                document.getElementById("role").value;
+
+            if (username === "" ||
+                email === "" ||
+                password === "")
+            {
+                alert("Please fill all fields");
+                return;
+            }
+
+            try
+            {
+                const response = await fetch(
+                    "/api/register",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username: username,
+                            email: email,
+                            password: password,
+                            role: role.toUpperCase()
+                        })
+                    }
+                );
+
+                const result =
+                    await response.json();
+
+                alert(result.message);
+            }
+            catch (error)
+            {
+                alert("Server error");
+                console.error(error);
+            }
+        }
+
+
+        function loginUser()
+        {
+            alert("Login will be connected in the next step.");
+        }
+
+    </script>
+
+</body>
+</html>

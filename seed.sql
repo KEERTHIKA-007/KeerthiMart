@@ -1,0 +1,1 @@
+-- KeerthiMart seed/admin data will be added in the database step.

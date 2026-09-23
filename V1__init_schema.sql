@@ -1,0 +1,1 @@
+-- Initial migration will be added in the database step.
